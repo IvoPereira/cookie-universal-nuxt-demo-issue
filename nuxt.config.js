@@ -39,9 +39,7 @@ export default {
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
    */
-  plugins: [
-    '~/plugins/api-init',
-  ],
+  plugins: ['~/plugins/api-init'],
   /*
    ** Auto import components
    ** See https://nuxtjs.org/api/configuration-components
@@ -84,10 +82,7 @@ export default {
   },
   styleResources: {
     // See https://github.com/nuxt-community/style-resources-module/
-    scss: [
-      './assets/scss/_base.scss',
-      'avalanche-css/_avalanche.scss',
-    ],
+    scss: ['./assets/scss/_base.scss', 'avalanche-css/_avalanche.scss'],
   },
   router: {
     // linkActiveClass: 'is-active',
@@ -115,5 +110,4 @@ export default {
         }
       : {},
       */
-  // serverMiddleware: ['redirect-ssl'],
 }

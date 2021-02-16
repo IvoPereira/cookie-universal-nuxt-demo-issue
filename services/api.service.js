@@ -1,47 +1,29 @@
 import axios from 'axios'
 import { API_URL } from '@/common/config'
-import SetCookieParser from 'set-cookie-parser'
+/* import SetCookieParser from 'set-cookie-parser'
+
+function parseSetCookies(cookies = []) {
+  return cookies.map((cookie) => SetCookieParser(cookie))
+}
+*/
 
 const ApiService = {
-  init(cookieManager) {
+  init() {
     axios.defaults.baseURL = API_URL
     axios.defaults.headers.get.Accept = 'application/json'
     axios.defaults.headers.post.Accept = 'application/json'
 
     axios.interceptors.request.use(
       (request) => {
+        console.info(
+          '➖ [REQUESTING] ',
+          request.method.toUpperCase(),
+          request.url
+        )
         request.withCredentials = true
         return request
       },
       (error) => {
-        return Promise.reject(error)
-      }
-    )
-
-    axios.interceptors.response.use(
-      (res) => {
-        const parsedSetCookies = SetCookieParser.parse(res)
-
-        console.info('Logging PARSED SET COOKIES...', parsedSetCookies)
-
-        parsedSetCookies.forEach((cookie) => {
-          // Have an object with cookie options only
-          const cookieOptions = { ...cookie }
-          delete cookieOptions.name
-          delete cookieOptions.value
-
-          console.info(
-            'Now setting cookies: ',
-            cookie.name,
-            cookie.value,
-            cookieOptions
-          )
-          cookieManager.set(cookie.name, cookie.value, cookieOptions)
-        })
-
-        return res
-      },
-      function (error) {
         return Promise.reject(error)
       }
     )

@@ -9,8 +9,6 @@ const cookieSecret = 'RANDOM';
 app.use(cookieParser(cookieSecret));
 
 app.post('/give-me-cookies', (req, res) => {
-    console.log(req.cookies) 
-
     let options = {
         path: '/',
         maxAge: 1000 * 60 * 15, // 15 minutes
